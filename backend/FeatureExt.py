@@ -300,10 +300,7 @@ def GoogleIndex(url):
 
 #URL FROM FROM END HERE
 
-url='https://amazon.com/'
-
 feat=FeatureExt(url)
-
 
 model =pickle.load(open('Phishing Model 96.pkl','rb'))
 pred=model.predict(feat)

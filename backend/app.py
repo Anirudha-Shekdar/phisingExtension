@@ -14,8 +14,23 @@ import numpy as np
 import pickle
 from xgboost import XGBClassifier
 
+
+import sklearn 
+import re
+from nltk.corpus import stopwords
+from nltk.tokenize import word_tokenize
+import nltk
+nltk.download('punkt')
+nltk.download('stopwords')
+nltk.download('wordnet')
+from nltk.stem import WordNetLemmatizer
+lemmatizer = WordNetLemmatizer()
+import pickle
+
+
 app=Flask(__name__)
 CORS(app)
+
 @app.route('/predict/url', methods=['GET'])
 def get_data():
     data={
@@ -29,6 +44,7 @@ def get_data():
 def get_data_URL():
     data=request.json
     url=data['URL']
+    print("Running")
     def FeatureExt(url):
         feature=[]
         feature.append(UsingIp(url))
@@ -315,19 +331,22 @@ def get_data_URL():
             return 1
             
 
-    #URL FROM FROM END HERE
+    
 
     feat=FeatureExt(url)
-    print(feat)
+    print("url:",url,"feat",feat)
+    
     model =pickle.load(open('Phishing Model 96.pkl','rb'))
     pred=model.predict(feat)
+    
+    print(pred)
     if pred ==1 :
-        print("SAFE")
-        return("SAFE")
+        print("secure")
+        return("secure")
     
     else:
-        print("SUSPICIOUS!")
-        return("SUSPICIOUS!")
+        print("suspicious")
+        return("suspicious")
     
         
     
@@ -340,16 +359,54 @@ def get_data_URL():
         
         
         
-        
+@app.route('/predict/dataEmail', methods=['POST'])
+def get_data_EMAIL():
+    data=request.json
+    body=data['BODY']
+    
+    
+    def Preprocess(text):
+        text=re.sub(r"[^a-zA-Z]", " ", text)
+        stop_words=set(stopwords.words("english"))
+        words=[word for word in text.split(' ') if word not in stop_words]
+        fin=''
+        for x in words:
+            fin=fin+x+' '
+
+        #words=word_tokenize(text)
+        lemma_words = [lemmatizer.lemmatize(o) for o in fin.split(" ")]
+        for x in lemma_words:
+            fin=fin+x+' '
+        return fin
+    
+    
+    def lowerChange(text):
+        return text.lower()
+    def pre_input(text):
+        text_without_linebreaks = text.replace('\n', " ")
+        textlower=lowerChange(text_without_linebreaks)
+        text_pre=Preprocess(textlower)
+        return text_pre
+
+    
+    pro_text=pre_input(body)
+    print("processed",pro_text)
+
+    loaded_model = pickle.load(open('EMail_Detection_98.pkl', 'rb'))
+
+    pred=loaded_model.predict([pro_text])
+    print("\nPred:",pred)
+    if pred ==0:
+        print("Secure")
+        return 'secure'
+    else:
+        print("suspicious")
+        return "suspicious"
+
+    
         
     
 
-@app.route('/predict/email', methods=['GET'])
-def get_data_email():
-    data={
-        "verdict_email":"predicting email"
-    }
-    return jsonify(data)
 
 
 if __name__ =='__main__' :
