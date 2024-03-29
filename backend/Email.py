@@ -24,10 +24,6 @@ def Preprocess(text):
     lemma_words = [lemmatizer.lemmatize(o) for o in fin.split(" ")]
     for x in lemma_words:
       fin=fin+x+' '
-
-
-
-
     return fin
 
 
