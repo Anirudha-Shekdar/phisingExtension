@@ -19,13 +19,13 @@ python app.py
 
 ### Outcome
 
-![Wen Sentinal Screenshot](utilities\Picture1.png)
+![Wen Sentinal Screenshot](utilities/Picture1.png)
 
-![Wen Sentinal Screenshot](utilities\Picture2.png)
+![Wen Sentinal Screenshot](utilities/Picture2.png)
 
-![Wen Sentinal Screenshot](utilities\Picture3.png) 
+![Wen Sentinal Screenshot](utilities/Picture3.png) 
 
-![Wen Sentinal Screenshot](utilities\Picture4.png) 
+![Wen Sentinal Screenshot](utilities/Picture4.png) 
 
 
 
