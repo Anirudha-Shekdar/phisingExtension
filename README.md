@@ -6,15 +6,22 @@ The research introduces an innovative ML-driven system designed to combat phishi
 The study presents a machine learning-based system to mitigate malicious emails and phishing attempts. It utilizes a thorough methodology that includes gathering datasets, preprocessing, creating ML models, and creating an intuitive browser extension interface. The system detects malicious email content with 98.6% accuracy and phishing URLs with 96.4% accuracy. This same seamless integration of the graphical user interface into users' digital environments is implied.
 
 
-
 ### To Run
 ```bash
 cd frontend
-npm start
+npm run build
+""" Go to chrome, go to extensions , turn on developers mode , select 'Load Unpacked' , select the build folder so created.
+You'll have the extension added in Chrome. """
+```
+*THE BACKEND IN DEPLOYED AND INTEGERATED*
+
+*BUT IF YOU WANT TO RUN THE BACKEND LOCALLY*
+```bash
 # in another terminal
 cd backend
 pip install -r requirements.txt
 python app.py
+#(make sure to change the routes in the frontend)
 ```
 
 ### Outcome
