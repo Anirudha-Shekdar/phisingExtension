@@ -63,7 +63,7 @@ const Homepage = () => {
   const checkURL = async (url) => {
     setUrlStatus('processing')
     console.log("Fetching Verdict");
-    const response=await axios.post("https://phishing-detection-backend.onrender.com/predict/dataURL",{'URL':url})
+    const response=await axios.post("https://ph-ad5zyhq5ja-uc.a.run.app/predict/dataURL",{'URL':url})
     
     setUrlVerdict(response.data)
     setUrlStatus("processed")
@@ -109,7 +109,7 @@ const Homepage = () => {
     console.log("first");
         const checkEmail= async(body) => {
     setEmailStatus('processing')
-    const response=await axios.post("https://phishing-detection-backend.onrender.com/predict/dataEmail" , {'BODY':body})
+    const response=await axios.post("https://ph-ad5zyhq5ja-uc.a.run.app/predict/dataEmail" , {'BODY':body})
     console.log(response);
     setEmailVerdict(response.data)
     setEmailStatus("processed")

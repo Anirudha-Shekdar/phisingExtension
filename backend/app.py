@@ -31,6 +31,10 @@ import pickle
 app=Flask(__name__)
 CORS(app)
 
+@app.route('/', methods=['GET'])
+def index():
+    return "Server Live!"
+
 @app.route('/predict/url', methods=['GET'])
 def get_data():
     data={
